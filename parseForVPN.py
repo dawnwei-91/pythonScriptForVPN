@@ -29,7 +29,7 @@ def getResult(html):
     return resName, resPort,resPass
 
 def changeLocal(inFo,i=0):
-    textLocal=open('C:\Users\Wei\Desktop\gui-config.json','r')
+    textLocal=open('C:\Users\xxx\Desktop\gui-config.json','r')
     readText=textLocal.read()
     textLocal.close()
 
@@ -48,7 +48,7 @@ def changeLocal(inFo,i=0):
 #   print resName1, resPort1, resPass1
     text1=readText.replace(resName1[0],inFo[0][i].upper()).replace(resPort1[0],inFo[1][i]).replace(resPass1[0],inFo[2][i])
 #   print text1
-    textHand=open('C:\Users\Wei\Desktop\gui-config.json','w')
+    textHand=open('C:\Users\xxx\Desktop\gui-config.json','w')
     textHand.write(text1)
     textHand.close()
 
@@ -58,7 +58,7 @@ inFo = getResult(html)
 
 try:
     changeLocal(inFo,index)
-    a=os.system('C:\\Users\\Wei\\Desktop\\Shadowsocks.exe')
+    a=os.system('C:\\Users\\xxx\\Desktop\\Shadowsocks.exe')
 
 except Exception,e:  
     print Exception,":",e
