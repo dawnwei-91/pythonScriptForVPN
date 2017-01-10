@@ -2,8 +2,11 @@
 # -*- coding: utf-8 -*-
 import urllib
 import re
+import os
 
-index=1
+os.system('taskkill /f /im Shadowsocks.exe')
+index=int(raw_input('0 or 1 or 2:'))
+
 def getHtml(url):
     page = urllib.urlopen(url)
     html = page.read()
@@ -21,8 +24,8 @@ def getResult(html):
     regPass = r'\xe5\xaf\x86\xe7\xa0\x81:(\d+)</h4'
     comPass = re.compile(regPass)
     resPass = re.findall(comPass,html)
-   
-   
+    
+    
     return resName, resPort,resPass
 
 def changeLocal(inFo,i=0):
@@ -43,17 +46,21 @@ def changeLocal(inFo,i=0):
     comPass1 = re.compile(regPass1)
     resPass1 = re.findall(comPass1,readText)
 #   print resName1, resPort1, resPass1
-    text1=readText.replace(resName1[0],inFo[0][i].upper())
-    text2=text1.replace(resPort1[0],inFo[1][i])
-    text3=text2.replace(resPass1[0],inFo[2][i])
-#   print text3
+    text1=readText.replace(resName1[0],inFo[0][i].upper()).replace(resPort1[0],inFo[1][i]).replace(resPass1[0],inFo[2][i])
+#   print text1
     textHand=open('C:\Users\Wei\Desktop\gui-config.json','w')
-    textHand.write(text3)
+    textHand.write(text1)
     textHand.close()
 
 
 html = getHtml("http://www.ishadowsocks.info/")
 inFo = getResult(html)
 
+try:
+    changeLocal(inFo,index)
+    a=os.system('C:\\Users\\Wei\\Desktop\\Shadowsocks.exe')
 
-changeLocal(inFo,index)
+except Exception,e:  
+    print Exception,":",e
+    raw_input('Say the Error.')
+    
